@@ -30,22 +30,31 @@ namespace SnakeApple.Space
             ""id"": ""4b898d7d-147a-4c35-ac78-eda43810e511"",
             ""actions"": [
                 {
-                    ""name"": ""TouchAction"",
+                    ""name"": ""TouchEnter"",
                     ""type"": ""Button"",
                     ""id"": ""5a092bd3-c40a-4e22-9459-65855ee6768f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""TouchPosition"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""0b92a6e6-9583-466c-8246-278844ca1e13"",
+                    ""id"": ""9c275a4a-58d4-4e8b-9b3c-f1fd7dbd48f2"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveDirection"",
+                    ""type"": ""Value"",
+                    ""id"": ""bd735658-8ebe-4558-8137-665524c01c41"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -53,23 +62,133 @@ namespace SnakeApple.Space
                     ""name"": """",
                     ""id"": ""abe43e23-0afd-4ee6-bdf5-59c455437dd8"",
                     ""path"": ""<Touchscreen>/primaryTouch/press"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TouchAction"",
+                    ""action"": ""TouchEnter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5505648d-553a-4e1a-a55f-bee7570d5919"",
-                    ""path"": ""<Touchscreen>/primaryTouch/delta"",
+                    ""id"": ""4c749ff6-97fe-4b64-9ced-5f0171f1c648"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TouchPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""db49022f-8011-4e3b-8115-52311c06239b"",
+                    ""path"": ""2DVector(mode=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4285d4b9-d705-4a43-ba0b-5217cb586df3"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""37c62c2c-9eec-4741-ac52-b9c116e15110"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""d2e87fc2-8d17-434b-a455-c73bcd13667f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ae098a03-e25c-47b4-ba8c-07fac4fe3430"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""b28b5dd9-21a8-4fbb-b6bb-7199df805efa"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c3c0f59e-fc72-4861-bccf-64239746b9a3"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""6e0a7d87-d2d1-4ba5-868a-25bc9995b632"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2c94f821-7d72-46d0-89c4-5e4126f882c9"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d813e7d5-9017-40d1-9dbf-a0b69a4da605"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -78,8 +197,9 @@ namespace SnakeApple.Space
 }");
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-            m_Player_TouchAction = m_Player.FindAction("TouchAction", throwIfNotFound: true);
+            m_Player_TouchEnter = m_Player.FindAction("TouchEnter", throwIfNotFound: true);
             m_Player_TouchPosition = m_Player.FindAction("TouchPosition", throwIfNotFound: true);
+            m_Player_MoveDirection = m_Player.FindAction("MoveDirection", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -141,14 +261,16 @@ namespace SnakeApple.Space
         // Player
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-        private readonly InputAction m_Player_TouchAction;
+        private readonly InputAction m_Player_TouchEnter;
         private readonly InputAction m_Player_TouchPosition;
+        private readonly InputAction m_Player_MoveDirection;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
             public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @TouchAction => m_Wrapper.m_Player_TouchAction;
+            public InputAction @TouchEnter => m_Wrapper.m_Player_TouchEnter;
             public InputAction @TouchPosition => m_Wrapper.m_Player_TouchPosition;
+            public InputAction @MoveDirection => m_Wrapper.m_Player_MoveDirection;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -158,22 +280,28 @@ namespace SnakeApple.Space
             {
                 if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-                @TouchAction.started += instance.OnTouchAction;
-                @TouchAction.performed += instance.OnTouchAction;
-                @TouchAction.canceled += instance.OnTouchAction;
+                @TouchEnter.started += instance.OnTouchEnter;
+                @TouchEnter.performed += instance.OnTouchEnter;
+                @TouchEnter.canceled += instance.OnTouchEnter;
                 @TouchPosition.started += instance.OnTouchPosition;
                 @TouchPosition.performed += instance.OnTouchPosition;
                 @TouchPosition.canceled += instance.OnTouchPosition;
+                @MoveDirection.started += instance.OnMoveDirection;
+                @MoveDirection.performed += instance.OnMoveDirection;
+                @MoveDirection.canceled += instance.OnMoveDirection;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
             {
-                @TouchAction.started -= instance.OnTouchAction;
-                @TouchAction.performed -= instance.OnTouchAction;
-                @TouchAction.canceled -= instance.OnTouchAction;
+                @TouchEnter.started -= instance.OnTouchEnter;
+                @TouchEnter.performed -= instance.OnTouchEnter;
+                @TouchEnter.canceled -= instance.OnTouchEnter;
                 @TouchPosition.started -= instance.OnTouchPosition;
                 @TouchPosition.performed -= instance.OnTouchPosition;
                 @TouchPosition.canceled -= instance.OnTouchPosition;
+                @MoveDirection.started -= instance.OnMoveDirection;
+                @MoveDirection.performed -= instance.OnMoveDirection;
+                @MoveDirection.canceled -= instance.OnMoveDirection;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -193,8 +321,9 @@ namespace SnakeApple.Space
         public PlayerActions @Player => new PlayerActions(this);
         public interface IPlayerActions
         {
-            void OnTouchAction(InputAction.CallbackContext context);
+            void OnTouchEnter(InputAction.CallbackContext context);
             void OnTouchPosition(InputAction.CallbackContext context);
+            void OnMoveDirection(InputAction.CallbackContext context);
         }
     }
 }

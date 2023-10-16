@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847d81f67f5be2b49bd1acfd57607b28, type: 3}
   m_Name: InputReader
   m_EditorClassIdentifier: 
+  TouchDeadZoneMagnitude: 2
+  TouchMaxMagnitude: 200
