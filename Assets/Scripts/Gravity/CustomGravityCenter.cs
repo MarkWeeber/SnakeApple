@@ -14,8 +14,8 @@ namespace SnakeApple.Space
 
         private void AssingGravityCenter()
         {
-            CustomGravity[] customGravities = FindObjectsOfType<CustomGravity>().ToArray();
-            foreach (CustomGravity item in customGravities)
+            CustomGravityMovement[] customGravities = FindObjectsOfType<CustomGravityMovement>().ToArray();
+            foreach (CustomGravityMovement item in customGravities)
             {
                 item.GravityCenter = transform;
             }

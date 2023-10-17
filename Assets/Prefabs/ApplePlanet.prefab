@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1529366688456167679}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ApplePlanet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2911755199479144907}
   - component: {fileID: 1347666570494850838}
   - component: {fileID: 1347666570494850826}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,8 +96,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1902057999135207705, guid: 4de917424f1d73946b3e65058bd2c2b8, type: 3}
-  - {fileID: -348237781603598611, guid: 4de917424f1d73946b3e65058bd2c2b8, type: 3}
+  - {fileID: 2100000, guid: 75896c51627bb24438f9739d187615af, type: 2}
+  - {fileID: 2100000, guid: e75d0650e63b4e448be925e86aa05f03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 2816179735638693714}
   - component: {fileID: 7864169385965701016}
   - component: {fileID: 6803074075874578053}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Vetka
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7754141509786477027, guid: 4de917424f1d73946b3e65058bd2c2b8, type: 3}
+  - {fileID: 2100000, guid: a17deeeca07b05b488deccf84857fe6f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

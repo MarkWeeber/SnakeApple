@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -311,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732233467}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: -0.28569588, y: 40.1589, z: 8.785914}
+  m_LocalPosition: {x: -0.28569588, y: 50.158905, z: 8.785886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -428,7 +428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.70710576, y: 0, z: 0, w: 0.7071079}
-  m_LocalPosition: {x: -0.28569588, y: 40.1589, z: 8.785914}
+  m_LocalPosition: {x: -0.28569588, y: 50.158905, z: 8.785886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -566,7 +566,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0, y: 0, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
-  CameraDistance: 10
+  CameraDistance: 20
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0
@@ -687,14 +687,6 @@ PrefabInstance:
     - target: {fileID: 6164848795010936560, guid: 47412631a9d6adb4385087b070ebc177, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6434685649065203796, guid: 47412631a9d6adb4385087b070ebc177, type: 3}
-      propertyPath: standingRotationSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6434685649065203797, guid: 47412631a9d6adb4385087b070ebc177, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6829183252816688202, guid: 47412631a9d6adb4385087b070ebc177, type: 3}
       propertyPath: m_RootOrder
