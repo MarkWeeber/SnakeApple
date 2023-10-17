@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace SnakeApple.Space
 {
@@ -13,13 +9,14 @@ namespace SnakeApple.Space
         [SerializeField] private bool rotateStandingOnSurface = false;
         [SerializeField] private float standingRotationSpeed = 10f;
 
+        public float moveSpeed = 5f;
+
         private Transform gravityCenter;
         public Transform GravityCenter { get => gravityCenter; set => gravityCenter = value; }
 
         private Rigidbody rb;
         private Vector3 contactPointNormal;
-        private Quaternion contactPointRotation;
-        private Vector3 lookRotation;
+        private bool touchingSurface;
 
         private void Start()
         {
@@ -47,20 +44,37 @@ namespace SnakeApple.Space
 
         private void HandleStandingOnSurfaceRotation()
         {
-            transform.up = Vector3.Slerp(transform.up, contactPointNormal, standingRotationSpeed * Time.fixedDeltaTime);
-            //lookRotation = (transform.position - contactPointNormal);
-            //lookRotation.y = transform.rotation.y;
-            //transform.rotation = Quaternion.LookRotation(lookRotation);
-            //transform.rotation = Quaternion.Euler(contactPointNormal.x, contactPointNormal.y, contactPointNormal.z);
-            //transform.LookAt(contactPointNormal);
+            if(touchingSurface)
+            {
+                Quaternion newRotation = Quaternion.FromToRotation(transform.up, contactPointNormal) * transform.rotation;
+                transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, standingRotationSpeed * Time.fixedDeltaTime);
+                Vector3 newPosition = transform.forward * moveSpeed * Time.fixedDeltaTime;
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity + newPosition, 10f);
+                
+                //transform.position += newPosition;
+            }
+
         }
 
         private void OnCollisionStay(Collision collision)
         {
             if(rotateStandingOnSurface)
             {
-                ContactPoint contactPoint = collision.contacts[0];
-                contactPointNormal = contactPoint.normal;
+                touchingSurface = false;
+                if (collision.transform == gravityCenter)
+                {
+                    ContactPoint contactPoint = collision.contacts[0];
+                    contactPointNormal = contactPoint.normal;
+                    touchingSurface = true;
+                }
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collision.transform == gravityCenter)
+            {
+                touchingSurface = false;
             }
         }
     }

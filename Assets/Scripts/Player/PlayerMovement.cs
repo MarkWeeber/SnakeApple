@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace SnakeApple.Space
 {
@@ -16,6 +12,8 @@ namespace SnakeApple.Space
         private Rigidbody rb;
         private bool alive;
         private float steerValue;
+
+        public Vector3 newPosition;
 
         private void Start()
         {
@@ -40,7 +38,10 @@ namespace SnakeApple.Space
 
         private void MoveForward()
         {
-            //rb.velocity = transform.forward * moveSpeed * Time.fixedDeltaTime;
+            //newPosition = transform.forward * moveSpeed * Time.fixedDeltaTime;
+            //transform.position += newPosition; 
+            //rb.velocity += addedVelocity;
+            //transform.Translate(transform.position + addedVelocity);
             
         }
 
