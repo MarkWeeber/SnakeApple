@@ -594,6 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: e6e7ab491e720d64f94ccfa8d4822156, type: 2}
+  rotateLerpRate: 5
 --- !u!1 &6191541607865384014
 GameObject:
   m_ObjectHideFlags: 0
