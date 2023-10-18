@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace SnakeApple.Space
@@ -19,7 +18,7 @@ namespace SnakeApple.Space
 
         private bool touchingSurface;
         private Rigidbody rb;
-        public Vector3 contactPointNormal;
+        private Vector3 contactPointNormal;
         private Vector3 contactPostion;
         private Vector3 forwardMovementVector;
         private Vector3 customGravitiyVector;
@@ -35,7 +34,7 @@ namespace SnakeApple.Space
         {
             CalculateIfOnSurface();
             SetPositionioning();
-            Debug.DrawRay(transform.position, contactPointNormal * 7f, Color.red);
+            //Debug.DrawRay(transform.position, contactPointNormal * 7f, Color.red);
         }
 
         private void FixedUpdate()
@@ -82,10 +81,10 @@ namespace SnakeApple.Space
                     break;
                 }
                 Ray ray = new Ray(raycastOrigins[i].position, raycastOrigins[i].forward);
-                Debug.DrawRay(raycastOrigins[i].position, raycastOrigins[i].forward * downLookingRayDistance, Color.cyan);
+                //Debug.DrawRay(raycastOrigins[i].position, raycastOrigins[i].forward * downLookingRayDistance, Color.cyan);
                 if (Physics.Raycast(ray, out hit, downLookingRayDistance, targetMask))
                 {
-                    Debug.DrawRay(hit.point, hit.normal * 1f, Color.magenta);
+                    //Debug.DrawRay(hit.point, hit.normal * 1f, Color.magenta);
                     if (i == 0)
                     {
                         touchingSurface = true;

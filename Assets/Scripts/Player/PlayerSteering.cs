@@ -8,12 +8,10 @@ namespace SnakeApple.Space
         [SerializeField] private InputReader inputReader;
         [SerializeField] private float rotateSpeed = 30f;
 
-        private bool alive;
         private float steerValue;
 
         private void Start()
         {
-            alive = true;
             inputReader.OnMoveEvent += HandleSteering;
         }
 
@@ -24,7 +22,7 @@ namespace SnakeApple.Space
 
         private void Update()
         {
-            if (alive)
+            if (gameObject.activeInHierarchy)
             {
                 Steer();
             }

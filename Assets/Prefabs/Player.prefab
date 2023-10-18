@@ -487,8 +487,8 @@ GameObject:
   - component: {fileID: 6829183252816688202}
   - component: {fileID: 6434685649065203797}
   - component: {fileID: 6434685649065203794}
-  - component: {fileID: 6434685649065203795}
   - component: {fileID: 6434685649065203796}
+  - component: {fileID: 476279463848404800}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -552,20 +552,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.65, z: 0}
---- !u!114 &6434685649065203795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164848795010936560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42ed0e3a10b584e4fb3280fd89db0254, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputReader: {fileID: 11400000, guid: e6e7ab491e720d64f94ccfa8d4822156, type: 2}
-  rotateSpeed: 60
 --- !u!114 &6434685649065203796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,7 +581,19 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
-  contactPointNormal: {x: 0.6216865, y: 0.7764741, z: 0.07520459}
+--- !u!114 &476279463848404800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6164848795010936560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce781cd38e5804145a0a4852d27a40c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: e6e7ab491e720d64f94ccfa8d4822156, type: 2}
 --- !u!1 &6191541607865384014
 GameObject:
   m_ObjectHideFlags: 0
