@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace SnakeApple.Space
 {
@@ -16,6 +12,7 @@ namespace SnakeApple.Space
         private Vector3 cameraVector;
         private Camera mainCamera;
         private float yInputRotation;
+        private float maxRotation;
 
         private void Start()
         {
@@ -30,20 +27,21 @@ namespace SnakeApple.Space
             inputReader.OnMoveEvent -= HandleMoveInput;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (gameObject.activeInHierarchy)
-            {
-                HandleDirectionSteering();
-                LerRotateDirection();
-            }
+            LerRotateDirection();
+            HandleDirectionSteering();
         }
 
         private void HandleDirectionSteering()
         {
-            cameraVector = mainCamera.transform.rotation * lerpInputVector;
+            cameraVector = mainCamera.transform.rotation * inputVector;
             yInputRotation = Vector3.SignedAngle(transform.forward, cameraVector, transform.up);
-            transform.Rotate(0f, yInputRotation, 0f);
+            if (Mathf.Abs(yInputRotation) < maxRotation)
+            {
+                transform.Rotate(0f, yInputRotation, 0f);
+                maxRotation = Mathf.Abs(yInputRotation);
+            }
         }
 
         private void LerRotateDirection()
@@ -56,7 +54,7 @@ namespace SnakeApple.Space
             if (inputSystemDirectionVector.magnitude > 0.05f)
             {
                 inputVector = inputSystemDirectionVector.normalized;
-
+                maxRotation = 355f;
             }
         }
     }

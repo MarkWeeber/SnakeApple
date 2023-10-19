@@ -1,11 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Burst;
-using Unity.Collections;
-using Unity.Jobs;
 using UnityEngine;
-using UnityEngine.Jobs;
 
 namespace SnakeApple.Space
 {
@@ -95,65 +90,6 @@ namespace SnakeApple.Space
                     trailingBodies[i].transform.rotation = Quaternion.Lerp(trailingBodies[i].transform.rotation, transformDatas[i].rotation, Time.deltaTime * lerpRate);
                 }
             }
-        }
-
-        private void ManageMovementParralelJob()
-        {
-            moveDelta = rb.velocity.magnitude;
-            NativeArray<Vector3> positions = new NativeArray<Vector3>(trailingBodies.Count, Allocator.TempJob);
-            NativeArray<Vector3> previousPositions = new NativeArray<Vector3>(trailingBodies.Count, Allocator.TempJob);
-            NativeArray<Quaternion> rotations = new NativeArray<Quaternion>(trailingBodies.Count, Allocator.TempJob);
-            for (int i = 0; i < trailingBodies.Count; i++)
-            {
-                positions[i] = trailingBodies[i].Tail.transform.position;
-                rotations[i] = trailingBodies[i].transform.rotation;
-                if (i == 0)
-                {
-                    previousPositions[i] = tail.position;
-                    continue;
-                }
-                previousPositions[i] = trailingBodies[i - 1].Tail.transform.position;
-            }
-            TrailBodyMoveJobParallelFor trailBodyMoveJobParallelFor = new TrailBodyMoveJobParallelFor {
-                deltaTime = Time.deltaTime,
-                moveDelta = moveDelta,
-                currentPositions = positions,
-                currentRotations = rotations,
-                previousPositions = previousPositions,
-                maxDistance = maxDistanceToTarget
-            };
-            JobHandle jobHandle = trailBodyMoveJobParallelFor.Schedule(trailingBodies.Count, 10);
-            jobHandle.Complete();
-            for (int i = 0; i < trailingBodies.Count; i++)
-            {
-                trailingBodies[i].transform.position = positions[i];
-                trailingBodies[i].transform.rotation = rotations[i];
-            }
-            positions.Dispose();
-            rotations.Dispose();
-            previousPositions.Dispose();
-        }
-    }
-
-    [BurstCompile]
-    public struct TrailBodyMoveJobParallelFor : IJobParallelFor
-    {
-        public float deltaTime;
-        public float moveDelta;
-        public NativeArray<Vector3> currentPositions;
-        public NativeArray<Quaternion> currentRotations;
-        public NativeArray<Vector3> previousPositions;
-        public float maxDistance;
-        public void Execute(int index)
-        {
-            Vector3 direction = previousPositions[index] - currentPositions[index];
-            Quaternion rotationDirection = Quaternion.LookRotation(direction);
-            currentRotations[index] = rotationDirection;
-            float currentDistance = direction.magnitude;
-            if (currentDistance > maxDistance)
-            {
-                currentPositions[index] = previousPositions[index] - direction.normalized * maxDistance;
-            }   
         }
     }
 
