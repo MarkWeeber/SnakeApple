@@ -9,14 +9,13 @@ namespace SnakeApple.Space
     public class PlayerDirectionSteering : MonoBehaviour
     {
         [SerializeField] private InputReader inputReader;
-        [SerializeField] private float rotateLerpRate = 5f;
+        [SerializeField] private float rotateLerpRate = 10f;
 
         private Vector3 inputVector;
         private Vector3 lerpInputVector;
         private Vector3 cameraVector;
         private Camera mainCamera;
         private float yInputRotation;
-        private bool rotate;
 
         private void Start()
         {
@@ -42,13 +41,9 @@ namespace SnakeApple.Space
 
         private void HandleDirectionSteering()
         {
-            if (rotate)
-            {
-                cameraVector = mainCamera.transform.rotation * inputVector;
-                yInputRotation = Vector3.SignedAngle(transform.forward, cameraVector, transform.up);
-                transform.Rotate(0f, yInputRotation, 0f);
-                rotate = false;
-            }
+            cameraVector = mainCamera.transform.rotation * lerpInputVector;
+            yInputRotation = Vector3.SignedAngle(transform.forward, cameraVector, transform.up);
+            transform.Rotate(0f, yInputRotation, 0f);
         }
 
         private void LerRotateDirection()
@@ -61,7 +56,7 @@ namespace SnakeApple.Space
             if (inputSystemDirectionVector.magnitude > 0.05f)
             {
                 inputVector = inputSystemDirectionVector.normalized;
-                rotate = true;
+
             }
         }
     }

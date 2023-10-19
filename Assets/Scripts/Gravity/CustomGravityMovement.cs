@@ -7,7 +7,7 @@ namespace SnakeApple.Space
     public class CustomGravityMovement : MonoBehaviour
     {
         [SerializeField] private float downVelocity = 10f;
-        [SerializeField] private float movementSpeed = 300f;
+        [SerializeField] private float movementSpeed = 400f;
         [SerializeField] private float standingRotationLerpSpeed = 2f;
         [SerializeField] private float downLookingRayDistance = 2f;
         [SerializeField] private List<Transform> raycastOrigins;
@@ -34,7 +34,6 @@ namespace SnakeApple.Space
         {
             CalculateIfOnSurface();
             SetPositionioning();
-            //Debug.DrawRay(transform.position, contactPointNormal * 7f, Color.red);
         }
 
         private void FixedUpdate()
@@ -81,10 +80,8 @@ namespace SnakeApple.Space
                     break;
                 }
                 Ray ray = new Ray(raycastOrigins[i].position, raycastOrigins[i].forward);
-                //Debug.DrawRay(raycastOrigins[i].position, raycastOrigins[i].forward * downLookingRayDistance, Color.cyan);
                 if (Physics.Raycast(ray, out hit, downLookingRayDistance, targetMask))
                 {
-                    //Debug.DrawRay(hit.point, hit.normal * 1f, Color.magenta);
                     if (i == 0)
                     {
                         touchingSurface = true;
@@ -107,7 +104,6 @@ namespace SnakeApple.Space
                 Quaternion newRotation = Quaternion.FromToRotation(transform.up, contactPointNormal) * transform.rotation;
                 transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, standingRotationLerpSpeed * Time.deltaTime);
                 transform.position = contactPostion;
-                
             }
         }
     }

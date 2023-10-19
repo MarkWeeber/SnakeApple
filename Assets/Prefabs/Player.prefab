@@ -593,7 +593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5516502312435910970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -678,7 +678,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!114 &6434685649065203796
 MonoBehaviour:
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   downVelocity: 10
-  movementSpeed: 300
+  movementSpeed: 400
   standingRotationLerpSpeed: 2
   downLookingRayDistance: 2
   raycastOrigins:
@@ -737,9 +737,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistanceToTarget: 1
   trailBodyPrefab: {fileID: 3144145073533934713, guid: daf352fe816237e4c80fb9f56b1892c7, type: 3}
-  maxTrailBodies: 50
+  maxTrailBodies: 200
   tail: {fileID: 1226305929534014101}
-  trailingBodies: []
+  trailingBodies:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  trailUpdateDuration: 0.1
+  lerpRate: 20
 --- !u!1 &6191541607865384014
 GameObject:
   m_ObjectHideFlags: 0

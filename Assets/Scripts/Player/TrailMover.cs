@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Jobs;
 
@@ -17,14 +17,25 @@ namespace SnakeApple.Space
         [SerializeField] private int maxTrailBodies = 50;
         [SerializeField] private Transform tail;
         [SerializeField] private List<TrailingBody> trailingBodies;
+        [SerializeField] private float trailUpdateDuration = 0.05f;
+        [SerializeField] private float lerpRate = 10f;
 
         private GameObject spawnedObject;
         private Rigidbody rb;
         private float moveDelta;
+        private float trailUpdateTimer;
+        private TransformData[] transformDatas;
+        private bool transformsCollected;
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+            transformDatas = new TransformData[maxTrailBodies + 1];
+            for (int i = 0; i < transformDatas.Length; i++)
+            {
+                transformDatas[i].position = Vector3.zero;
+                transformDatas[i].rotation = Quaternion.identity;
+            }
             if (trailBodyPrefab == null)
             {
                 trailingBodies = new List<TrailingBody>();
@@ -33,9 +44,9 @@ namespace SnakeApple.Space
 
         public void CollectibleGrabbed()
         {
-            if (trailingBodies.Count <= maxTrailBodies || !trailingBodies.Any())
+            if (trailingBodies.Count < maxTrailBodies || !trailingBodies.Any())
             {
-                spawnedObject = Instantiate(trailBodyPrefab, transform.position, Quaternion.identity);
+                spawnedObject = Instantiate(trailBodyPrefab);
                 if (trailingBodies.Count > 0)
                 {
                     spawnedObject.transform.position =
@@ -55,7 +66,35 @@ namespace SnakeApple.Space
 
         private void Update()
         {
-            ManageMovementParralelJob();
+            StoreTransforms();
+            LerpSetTransforms();
+        }
+
+        private void StoreTransforms()
+        {
+            trailUpdateTimer -= Time.deltaTime;
+            if (trailUpdateTimer < 0)
+            {
+                for (int i = trailingBodies.Count; i > 0; i--)
+                {
+                    transformDatas[i] = transformDatas[i - 1];
+                }
+                transformDatas[0] = new TransformData { position = tail.position, rotation = tail.rotation };
+                trailUpdateTimer = trailUpdateDuration;
+                transformsCollected = true;
+            }
+        }
+
+        private void LerpSetTransforms()
+        {
+            if (transformsCollected)
+            {
+                for (int i = 0; i < trailingBodies.Count; i++)
+                {
+                    trailingBodies[i].transform.position = Vector3.Lerp(trailingBodies[i].transform.position, transformDatas[i].position, Time.deltaTime * lerpRate);
+                    trailingBodies[i].transform.rotation = Quaternion.Lerp(trailingBodies[i].transform.rotation, transformDatas[i].rotation, Time.deltaTime * lerpRate);
+                }
+            }
         }
 
         private void ManageMovementParralelJob()
@@ -76,6 +115,7 @@ namespace SnakeApple.Space
                 previousPositions[i] = trailingBodies[i - 1].Tail.transform.position;
             }
             TrailBodyMoveJobParallelFor trailBodyMoveJobParallelFor = new TrailBodyMoveJobParallelFor {
+                deltaTime = Time.deltaTime,
                 moveDelta = moveDelta,
                 currentPositions = positions,
                 currentRotations = rotations,
@@ -95,9 +135,10 @@ namespace SnakeApple.Space
         }
     }
 
-    [BurstCompatible]
+    [BurstCompile]
     public struct TrailBodyMoveJobParallelFor : IJobParallelFor
     {
+        public float deltaTime;
         public float moveDelta;
         public NativeArray<Vector3> currentPositions;
         public NativeArray<Quaternion> currentRotations;
@@ -109,14 +150,17 @@ namespace SnakeApple.Space
             Quaternion rotationDirection = Quaternion.LookRotation(direction);
             currentRotations[index] = rotationDirection;
             float currentDistance = direction.magnitude;
-            if (currentDistance > maxDistance + 0.1f)
+            if (currentDistance > maxDistance)
             {
                 currentPositions[index] = previousPositions[index] - direction.normalized * maxDistance;
-            }
-            else
-            {
-                currentPositions[index] += currentRotations[index] * Vector3.forward * moveDelta;
-            }    
+            }   
         }
+    }
+
+    [System.Serializable]
+    public struct TransformData
+    {
+        public Vector3 position;
+        public Quaternion rotation;
     }
 }
